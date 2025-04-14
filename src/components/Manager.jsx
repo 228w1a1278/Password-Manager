@@ -125,10 +125,11 @@ transition={Bounce}
             onClick={savePassword}
             className="flex items-center justify-center bg-green-500 rounded-full px-8 py-2 w-fit hover:bg-green-400 gap-2 border border-green-900"
           >
-            <lord-icon
-              src="https://cdn.lordicon.com/sbnjyzil.json"
-              trigger="hover"
-            ></lord-icon>
+           <lord-icon
+           style={{width:"25px",height:"25px"}}
+       src="https://cdn.lordicon.com/hqymfzvj.json"
+       trigger="hover">
+</lord-icon>
             Add Password{" "}
           </button>
         </div>
