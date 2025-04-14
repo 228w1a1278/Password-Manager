@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 
+  import { ToastContainer, toast,Bounce } from 'react-toastify';
+  
 const Manager = () => {
   const ref = useRef();
   const passwordRef = useRef();
@@ -7,13 +9,13 @@ const Manager = () => {
   const [passwordArray, setPasswordARray] = useState([]);
   const showPassword = () => {
     // alert("show the password");
-    passwordRef.current.type="text"
+    passwordRef.current.type = "text";
     if (ref.current.src.includes("/assets/closeicon.png")) {
       ref.current.src = "/assets/openicon.png";
-      passwordRef.current.type="password"
+      passwordRef.current.type = "password";
     } else {
       ref.current.src = "/assets/closeicon.png";
-      passwordRef.current.type="text"
+      passwordRef.current.type = "text";
     }
   };
 
@@ -33,8 +35,35 @@ const Manager = () => {
   const handleChange = (e) => {
     setform({ ...form, [e.target.name]: [e.target.value] });
   };
+
+  const copyText =(text)=>{
+    toast('Copied to clipboard', {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "light",
+      });
+    navigator.clipboard.writeText(text)
+  }
   return (
     <>
+    <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick={false}
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+transition={Bounce}
+/>
       <div>
         <div className="absolute inset-0 -z-10 h-full w-full bg-green-50 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]">
           <div className="absolute left-0 right-0 top-0 -z-10 m-auto h-[310px] w-[310px] rounded-full bg-fuchsia-400 opacity-20 blur-[100px]"></div>
@@ -104,27 +133,72 @@ const Manager = () => {
           </button>
         </div>
         <div className="passwords">
-          <h2 className="font-bold text-2xl  w-[70%] mx-auto py-4">Your Passwords</h2>
-          {passwordArray.length===0 && <div>No passwords to show</div>}
-          {passwordArray.length!=0 && 
-          <table className="table-auto w-[70%] mx-auto rounded-md overflow-hidden">
-            <thead className="bg-green-500 text-white">
-              <tr>
-                <th className="py-2">Site</th>
-                <th className="py-2">Username</th>
-                <th className="py-2">Password</th>
-              </tr>
-            </thead>
-            <tbody className="bg-green-100">
-              {passwordArray.map((item,index)=>{
-              return  <tr key={index}>
-                <td className="py-2 border-white text-center w-32"><a href={item.site} target='_blank'>{item.site}</a></td>
-                <td className="py-2 border-white text-center w-32">{item.username}</td>
-                <td className="py-2 border-white text-center w-32">{item.password}</td>
-              </tr>
-})}
-            </tbody>
-          </table>}
+          <h2 className="font-bold text-2xl  w-[70%] mx-auto py-4">
+            Your Passwords
+          </h2>
+          {passwordArray.length === 0 && <div>No passwords to show</div>}
+          {passwordArray.length != 0 && (
+            <table className="table-auto w-[70%] mx-auto rounded-md overflow-hidden">
+              <thead className="bg-green-500 text-white">
+                <tr>
+                  <th className="py-2">Site</th>
+                  <th className="py-2">Username</th>
+                  <th className="py-2">Password</th>
+                </tr>
+              </thead>
+              <tbody className="bg-green-100">
+                {passwordArray.map((item, index) => {
+                  return (
+                    <tr key={index}>
+                      <td className=" flex items-center justify-center py-2 border-white text-center ">
+                        <div className="flex items-center justify-center">
+                        <a href={item.site} target="_blank">
+                          {item.site}
+                        </a>
+                        <div className="size-7 cursor-pointer" onClick={() => copyText(item.site)}
+                        >
+                        <lord-icon
+                        style={{width:"25px",height:"25px","paddingTop":"3px","paddingLeft":"3px"}}
+                          src="https://cdn.lordicon.com/lyrrgrsl.json"
+                          trigger="hover"
+                        ></lord-icon>
+                        </div>
+                        </div>
+                      </td>
+                      <td className=" justify-center py-2 border-white text-center w-32">
+                      <div className="flex items-center justify-center">
+                      <span>{item.username}</span>
+
+                        <div className="size-7 cursor-pointer" onClick={() => copyText(item.username)}
+                        >
+                        <lord-icon
+                        style={{width:"25px",height:"25px","paddingTop":"3px","paddingLeft":"3px"}}
+                          src="https://cdn.lordicon.com/lyrrgrsl.json"
+                          trigger="hover"
+                        ></lord-icon>
+                        </div>
+                        </div>
+                      </td>
+                      <td className="justify-center py-2 border-white text-center w-32">
+                      <div className="flex items-center justify-center">
+                      <span>{item.password}</span>
+
+                        <div className="size-7 cursor-pointer" onClick={() => copyText(item.password)}
+                        >
+                        <lord-icon
+                        style={{width:"25px",height:"25px","paddingTop":"3px","paddingLeft":"3px"}}
+                          src="https://cdn.lordicon.com/lyrrgrsl.json"
+                          trigger="hover"
+                        ></lord-icon>
+                        </div>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          )}
         </div>
       </div>
     </>
