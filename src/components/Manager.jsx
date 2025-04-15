@@ -22,7 +22,7 @@ const Manager = () => {
 
 
   const getPasswords=async() =>{
-    let req=await fetch("http://localhost:3000/")
+    let req=await fetch("http://localhost:3001/")
     let passwords=await req.json()
     console.log(passwords)
     setPasswordARray(passwords)
@@ -38,7 +38,7 @@ const Manager = () => {
       const newEntry = { ...form, id: newId };
   
       // Send POST request to save the new password in MongoDB
-      await fetch("http://localhost:3000/", {
+      await fetch("http://localhost:3001/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +76,7 @@ const Manager = () => {
     const newPasswords = passwordArray.filter(item => item.id !== id);
     setPasswordARray(newPasswords);
     // localStorage.setItem("password", JSON.stringify(newPasswords));
-    let res=await fetch("http://localhost:3000/",{method:"DELETE",headers:{"Content-Type":"application/json"},
+    let res=await fetch("http://localhost:3001/",{method:"DELETE",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({id})})
     toast("Password Deleted", {
       position: "top-right",

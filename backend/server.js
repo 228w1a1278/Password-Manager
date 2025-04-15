@@ -14,7 +14,7 @@ const client = new MongoClient(url);
 
 // Database Name
 const dbName = 'Passop';
-const port = 3000
+const port = 3001
 app.use(bodyparser.json())
 app.use(cors())
 client.connect();
@@ -34,28 +34,29 @@ app.post('/', async (req, res) => {
   res.send({success: true,result: findResult})
 })
 
-const { ObjectId } = require('mongodb');
+// Make sure app.use(express.json()) is added at the top
 
-const { ObjectId } = require('mongodb');
-
-app.delete('/', async (req, res) => {
-  const { id } = req.body; 
-  const db = client.db(dbName);
-  const collection = db.collection('passwords');
+app.delete("/", async (req, res) => {
+  const { id } = req.body;
+  console.log("Delete request received for id:", id);
 
   try {
-    const result = await collection.deleteOne({ _id: new ObjectId(id) });
+    const db = client.db(dbName);
+    const collection = db.collection('passwords');
 
-    if (result.deletedCount === 0) {
-      return res.status(404).send({ success: false, message: "Item not found" });
+    const result = await collection.deleteOne({ id: id }); // delete by UUID
+
+    if (result.deletedCount === 1) {
+      res.status(200).send({ success: true, message: "Password deleted" });
+    } else {
+      res.status(404).send({ success: false, message: "Password not found" });
     }
-
-    res.send({ success: true, result });
-  } catch (err) {
-    console.error(err);
-    res.status(500).send({ success: false, message: "Error deleting item" });
+  } catch (error) {
+    console.error("Error deleting password:", error);
+    res.status(500).send({ success: false, message: "Internal Server Error" });
   }
 });
+
 
 
 
