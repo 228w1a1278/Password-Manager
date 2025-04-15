@@ -17,13 +17,13 @@ const Navbar = () => {
           <a className="hover:font-bold" href="#">Contact</a>
         </li>
       </ul> */}
-     <button className="text-black bg-green-400 my-5 rounded-md flex justify-center items-center ">
-      <img className="invert w-8 p-1 "src="/assets/Github.png" alt="" />
-      <span className="font-bold px-2">Github</span>
+     <button className="text-black  bg-green-400 my-5 rounded-full flex justify-center items-center ring-white ring-1">
+      <img className="invert w-12 p-1 rounded-full"src="/assets/Github.png" alt="" />
+      <span className="font-bold px-1">Github</span>
      </button>
     </div>
     </nav>
   );
-};
+}; 
 
 export default Navbar;
