@@ -31,6 +31,7 @@ const Manager = () => {
    getPasswords()
   }, []);
 
+<<<<<<< HEAD
   // const savePassword = async () => {
   //   if(form.site.length>3 && form.username.length>3 &&form.password.length>3){
   //     let res=await fetch("http://localhost:3000/",{method:"DELETE",headers:{"Content-Type":"application/json"},
@@ -100,14 +101,46 @@ const Manager = () => {
   
 
   const deletePassword = async (id) => {
+=======
+  const savePassword = () => {
+    if(form.site.length>3 && form.username.length>3 &&form.password.length>3){
+    setPasswordARray([...passwordArray, { ...form, id: uuidv4() }]);
+    localStorage.setItem(
+      "password",
+      JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
+    );
+    console.log([...passwordArray, form]);
+    setform({ site: "", username: "", password: ""})
+    toast("Password saved Successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: false,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+  }
+  else{
+    toast("Error: Password not saved")
+  }
+  };
+
+  const deletePassword = (id) => {
+>>>>>>> 0ab19157324686c54ba5bae676e405880bd1efec
     console.log("Deleting the password with id " + id);
     let c=confirm("Do you really want to delete this password")
     if(c){
     const newPasswords = passwordArray.filter(item => item.id !== id);
     setPasswordARray(newPasswords);
+<<<<<<< HEAD
     // localStorage.setItem("password", JSON.stringify(newPasswords));
     let res=await fetch("http://localhost:3000/",{method:"DELETE",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({id})})
+=======
+    localStorage.setItem("password", JSON.stringify(newPasswords));
+>>>>>>> 0ab19157324686c54ba5bae676e405880bd1efec
     toast("Password Deleted", {
       position: "top-right",
       autoClose: 5000,
@@ -134,7 +167,11 @@ const Manager = () => {
       theme: "dark",
     });
     console.log("Editing the password with id" + id);
+<<<<<<< HEAD
     setform({...passwordArray.filter(i=>i.id===id)[0],id:id})
+=======
+    setform(passwordArray.filter(i=>i.id===id)[0])
+>>>>>>> 0ab19157324686c54ba5bae676e405880bd1efec
     const newPasswords = passwordArray.filter(item => item.id !== id);
     setPasswordARray(newPasswords);
   };
@@ -309,7 +346,11 @@ const Manager = () => {
                       </td>
                       <td className="justify-center py-2 border-white text-center w-32">
                         <div className="flex items-center justify-center">
+<<<<<<< HEAD
                           <span>{"*".repeat(item.password.length)}</span>
+=======
+                          <span>{item.password}</span>
+>>>>>>> 0ab19157324686c54ba5bae676e405880bd1efec
 
                           <div
                             className="size-7 cursor-pointer"
