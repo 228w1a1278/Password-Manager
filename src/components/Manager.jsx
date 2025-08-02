@@ -9,7 +9,6 @@ const Manager = () => {
   const [form, setform] = useState({ site: "", username: "", password: "" });
   const [passwordArray, setPasswordARray] = useState([]);
   const showPassword = () => {
-    // alert("show the password");
     passwordRef.current.type = "text";
     if (ref.current.src.includes("/assets/closeicon.png")) {
       ref.current.src = "/assets/openicon.png";
