@@ -20,7 +20,7 @@ const Navbar = () => {
       <button className="text-black  bg-green-400 my-5 rounded-full flex justify-center items-center ring-white ring-1">
       <img className="invert w-12 p-1 rounded-full"src="/assets/Github.png" alt="" />
       <a
-  href="https://github.com/your-username/your-repo"
+  href="https://github.com/228w1a1278/Password-Manager.git"
   target="_blank"
   rel="noopener noreferrer"
 >
